@@ -1,24 +1,27 @@
-### Setup
-
-Clone this repository first.
-To edit the plugin display name and other data, take a look at `plugin.json`.
-Edit the name of the project itself by going into `settings.gradle`.
-
-### Basic Usage
-
-See `src/example/ExamplePlugin.java` for some basic commands and event handlers.  
-Every main plugin class must extend `Plugin`. Make sure that `plugin.json` points to the correct main plugin class.
-
-Please note that the plugin system is in beta, and as such is subject to changes.
-
-### Building a Jar
-
-`gradlew jar` / `./gradlew jar`
-
-Output jar should be in `build/libs`.
-
-
-### Installing
-
-Simply place the output jar from the step above in your server's `config/mods` directory and restart the server.
-List your currently installed plugins/mods by running the `mods` command.
+### Building
+- `./gradlew jar`
+### Using
+- move plugin jar file to config/mods directory
+- Add your servers to the serverlist via
+- `add-server`
+- Check serverlist via
+- `list-servers`
+- Check `config` and `help` commands for more commands.
+### Example usage
+`
+add-server Foo 123 456 192.168.1.1 6567
+[I] Server added!
+list-servers
+[I] [13] Foo - 192.168.1.1:6567
+remove-server 13
+[I] Removed [13] Foo
+config labeldistance 2
+[I] labeldistance set to 2.
+config offlinemessage [scarlet]Server offline
+[I] offlinemessage set to [scarlet]Server offline.
+config connectdst 2
+[I] connectdst set to 2.
+config labelmessage %p players on map %m gamemode %g
+[I] Formatted status table Player count players on map mapname gamemode mode name
+[I] labelmessage set to %p players on map %m gamemode %g.
+`
