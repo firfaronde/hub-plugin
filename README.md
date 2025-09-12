@@ -8,7 +8,6 @@
 - `list-servers`
 - Check `config` and `help` commands for more commands.
 ### Example usage
-`
 - add-server Foo 123 456 192.168.1.1 6567
 - [I] Server added!
 - list-servers
@@ -24,4 +23,3 @@
 - config labelmessage %p players on map %m gamemode %g
 - [I] Formatted status table Player count players on map mapname gamemode mode name
 - [I] labelmessage set to %p players on map %m gamemode %g.
-`
