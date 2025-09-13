@@ -2,15 +2,18 @@ package firfaraon;
 
 import arc.Core;
 import arc.Events;
+import arc.graphics.Color;
 import arc.math.geom.Point2;
 import arc.struct.Seq;
 import arc.util.CommandHandler;
 import arc.util.Log;
 import arc.util.Strings;
 import arc.util.Timer;
+import mindustry.content.Fx;
 import mindustry.game.EventType;
 import mindustry.gen.Call;
 import mindustry.gen.Groups;
+import mindustry.gen.Player;
 import mindustry.mod.Plugin;
 import mindustry.net.Administration;
 
@@ -29,6 +32,7 @@ public class HubPlugin extends Plugin {
     public static Administration.Config labelDistance = new Administration.Config("labeldistance", "Distance between labels", 2, null, ()->{});
     public static Administration.Config offlineMessage = new Administration.Config("offlinemessage", "This message displays when server offline", "[scarlet]Offline", null, ()->{});
     public static Administration.Config connectdst = new Administration.Config("connectdst", "Distance at which plugin redirects player to server", 2, null, ()->{});
+    public static Administration.Config joinEffects = new Administration.Config("joinEffects", "If enabled, displays effect when player joined", true, null, ()->{});
 
     @Override
     public void init() {
@@ -130,6 +134,13 @@ public class HubPlugin extends Plugin {
                 });
             });
         }, 0, 1);
+
+        Events.on(EventType.PlayerJoin.class, (e)->{
+            if(joinEffects.bool()) {
+                Player p = e.player;
+                Call.effect(Fx.scatheExplosion, p.x, p.y, 0, Color.green);
+            }
+        });
     }
 
     public int getNextServerId() {
