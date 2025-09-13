@@ -7,6 +7,7 @@ import arc.util.Log;
 import mindustry.Vars;
 import mindustry.gen.Call;
 
+import static firfaraon.HubPlugin.addPlayers;
 import static firfaraon.HubPlugin.defaultLabel;
 
 public class Server {
@@ -52,6 +53,7 @@ public class Server {
             message = message.replace("%p", s.players+"").replace("%m", s.mapname).replace("%g", modeName);
             Call.label(message, 3.55f, Point2.x(pos)*8, (Point2.y(pos)-labelDistance)*8);
             setOffline(false);
+            addPlayers(s.players);
         }, f->{
             Call.label(Core.settings.getString("offlinemessage", "[scarlet]Offline"), 3.55f, Point2.x(pos)*8, (Point2.y(pos)-labelDistance)*8);
             Log.debug("Failed to ping host!", f);

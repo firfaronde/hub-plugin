@@ -16,6 +16,9 @@ import mindustry.net.Administration;
 
 public class HubPlugin extends Plugin {
     public static Seq<Server> servers;
+    public static int totalPlayers = 0;
+    public static void addPlayers(int i) { totalPlayers+=i; }
+    public static void clearPlayers() { totalPlayers = 0; }
     // 0 on map, gamemode
     // 1 on Maze, sandbox
     public static final String defaultLabel = "[stat]%p on %m[stat], %g";
@@ -103,9 +106,11 @@ public class HubPlugin extends Plugin {
 	    servers = Core.settings.getJson("servers", Seq.class, Server.class, Seq::new);
         Log.info("Loaded @ servers total", servers.size);
         Timer.schedule(()->{
+            clearPlayers();
             for(Server server : servers) {
                 server.label();
             }
+            Core.settings.put("totalPlayers", totalPlayers);
         }, 0, 3);
 
         Timer.schedule(() -> {
