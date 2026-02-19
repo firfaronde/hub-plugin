@@ -9,6 +9,7 @@ import arc.util.CommandHandler;
 import arc.util.Log;
 import arc.util.Strings;
 import arc.util.Timer;
+import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.game.EventType;
 import mindustry.gen.Call;
@@ -38,6 +39,7 @@ public class HubPlugin extends Plugin {
     public void init() {
         Events.on(EventType.ServerLoadEvent.class, (e)->{
             Log.info("Loading hub plugin...");
+            Vars.netServer.admins.addActionFilter(a->false);
             loadHub();
         });
     }
